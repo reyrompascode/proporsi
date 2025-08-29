@@ -10,7 +10,6 @@
             background-color: #f4f4f9;
             color: #333;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -24,20 +23,20 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 500px;
-            margin-bottom: 20px;
+            display: flex; /* Mengubah container menjadi flexbox */
+            flex-direction: column; /* Mengatur tata letak ke bawah */
+            min-height: 600px; /* Minimal tinggi agar ada ruang untuk footer di bawah */
         }
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 0;
+            margin-bottom: 1.5em;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        h2 {
-            text-align: center;
-            color: #555;
-            margin-top: 5px;
-            font-style: italic;
-            font-weight: normal;
+        .main-content {
+            flex-grow: 1; /* Konten utama akan mengambil semua ruang yang tersedia */
         }
         .form-group {
             margin-bottom: 1.5em;
@@ -108,45 +107,46 @@
             background-color: #dcdde1;
         }
         .footer {
-            margin-top: auto;
             text-align: center;
             font-size: 12px;
             color: #555;
             padding: 10px 0;
             border-top: 1px solid #ddd;
             font-style: italic;
+            margin-top: auto; /* Mendorong footer ke bawah kontainer */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Perhitungan Proporsi Jumlah KK</h1>
-        <h2>Pemutakhiran Wilkerstat SE2026</h2>
 
-        <div class="form-group">
-            <label for="segmen">Banyak Segmen:</label>
-            <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
+        <div class="main-content">
+            <div class="form-group">
+                <label for="segmen">Banyak Segmen:</label>
+                <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
+            </div>
+
+            <div class="form-group">
+                <label for="totalVar2">Jumlah KK:</label>
+                <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
+            </div>
+
+            <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
+
+            <form id="formSegmen"></form>
+
+            <div class="button-group">
+                <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
+                <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
+            </div>
+
+            <div class="result" id="hasil"></div>
         </div>
 
-        <div class="form-group">
-            <label for="totalVar2">Jumlah KK:</label>
-            <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
+        <div class="footer">
+            BPS Kota Jakarta Barat Jaya Jaya Jaya
         </div>
-
-        <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
-
-        <form id="formSegmen"></form>
-
-        <div class="button-group">
-            <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
-            <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
-        </div>
-
-        <div class="result" id="hasil"></div>
-    </div>
-
-    <div class="footer">
-        BPS Kota Jakarta Barat Jaya Jaya Jaya
     </div>
 
     <script>
