@@ -218,4 +218,31 @@
                 totalV2 += v2;
                 hasilHTML += `
                     <tr>
-                        <td>
+                        <td>${i + 1}</td>
+                        <td>${values[i]}</td>
+                        <td>${v2}</td>
+                    </tr>
+                `;
+            }
+
+            hasilHTML += `
+                <tr class="total">
+                    <td>Total</td>
+                    <td>${totalVar1}</td>
+                    <td>${totalV2}</td>
+                </tr>
+                </table>
+            `;
+
+            hasilElement.innerHTML = hasilHTML;
+        }
+
+        function resetForm() {
+            document.getElementById('segmen').value = "";
+            document.getElementById('totalVar2').value = "";
+            document.getElementById('formSegmen').innerHTML = "";
+            document.getElementById('hasil').innerHTML = "";
+        }
+    </script>
+</body>
+</html>
