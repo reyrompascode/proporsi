@@ -9,10 +9,11 @@
             font-family: sans-serif;
             background-color: #f4f4f9;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            /* Properti di bawah ini dihapus agar tidak berada di tengah */
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* justify-content: center; */
+            /* align-items: center; */
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -24,20 +25,20 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 500px;
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 600px;
         }
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 0;
+            margin-bottom: 1.5em;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        h2 {
-            text-align: center;
-            color: #555;
-            margin-top: 5px;
-            font-style: italic;
-            font-weight: normal;
+        .main-content {
+            flex-grow: 1;
         }
         .form-group {
             margin-bottom: 1.5em;
@@ -108,13 +109,13 @@
             background-color: #dcdde1;
         }
         .footer {
-            margin-top: auto;
             text-align: center;
             font-size: 12px;
             color: #555;
             padding: 10px 0;
             border-top: 1px solid #ddd;
             font-style: italic;
+            margin-top: auto;
         }
     </style>
 </head>
@@ -123,34 +124,35 @@
         <h1>Perhitungan Proporsi Jumlah KK</h1>
         <h2>Pemutakhiran Wilkerstat SE2026</h2>
 
-        <div class="form-group">
-            <label for="segmen">Banyak Segmen:</label>
-            <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
+        <div class="main-content">
+            <div class="form-group">
+                <label for="segmen">Banyak Segmen:</label>
+                <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
+            </div>
+
+            <div class="form-group">
+                <label for="totalVar2">Jumlah KK:</label>
+                <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
+            </div>
+
+            <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
+
+            <form id="formSegmen"></form>
+
+            <div class="button-group">
+                <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
+                <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
+            </div>
+
+            <div class="result" id="hasil"></div>
         </div>
 
-        <div class="form-group">
-            <label for="totalVar2">Jumlah KK:</label>
-            <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
+        <div class="footer">
+            BPS Kota Jakarta Barat Jaya Jaya Jaya
         </div>
-
-        <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
-
-        <form id="formSegmen"></form>
-
-        <div class="button-group">
-            <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
-            <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
-        </div>
-
-        <div class="result" id="hasil"></div>
-    </div>
-
-    <div class="footer">
-        BPS Kota Jakarta Barat Jaya Jaya Jaya
     </div>
 
     <script>
-        // Fungsi untuk memformat input menjadi format Rupiah (dengan pemisah titik)
         function formatRupiah(input) {
             let number_string = input.value.replace(/\./g, '').toString();
             let split = number_string.split(',');
@@ -167,9 +169,7 @@
             input.value = rupiah;
         }
 
-        // Fungsi yang ada sebelumnya
         function buatInput() {
-            // Mengambil nilai input setelah menghapus titik pemisah
             const jumlahRaw = document.getElementById('segmen').value;
             const jumlah = parseInt(jumlahRaw.replace(/\./g, ''));
             const form = document.getElementById('formSegmen');
@@ -191,7 +191,6 @@
         }
 
         function hitung() {
-            // Mengambil nilai input setelah menghapus titik pemisah
             const jumlahSegmenRaw = document.getElementById('segmen').value;
             const jumlah = parseInt(jumlahSegmenRaw.replace(/\./g, ''));
             
@@ -210,7 +209,6 @@
 
             for (let i = 1; i <= jumlah; i++) {
                 const inputElement = document.getElementById(`var1_${i}`);
-                // Mengambil nilai BTT setelah menghapus titik
                 let v = parseInt(inputElement.value.replace(/\./g, '')) || 0;
                 values.push(v);
                 totalVar1 += v;
@@ -243,7 +241,6 @@
                 }
                 
                 totalV2 += v2;
-                // Menampilkan hasil dengan format ribuan
                 hasilHTML += `
                     <tr>
                         <td>${i + 1}</td>
@@ -272,7 +269,6 @@
             document.getElementById('hasil').innerHTML = "";
         }
         
-        // Fungsi pembantu untuk memformat angka dengan pemisah ribuan
         function formatAngka(angka) {
             return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
