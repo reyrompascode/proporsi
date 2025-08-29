@@ -9,8 +9,8 @@
             font-family: sans-serif;
             background-color: #f4f4f9;
             color: #333;
-            margin: 0; /* Pastikan tidak ada margin default pada body */
-            overflow-y: auto; /* Mengizinkan scroll jika konten melebihi tinggi layar */
+            margin: 0;
+            overflow-y: auto;
         }
 
         .main-wrapper {
@@ -23,13 +23,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1; /* Konten akan mengisi ruang kosong */
-            /* padding: 20px; Menghapus padding ini */
+            flex-grow: 1;
+            padding: 20px; /* Tambahkan kembali padding agar tidak terlalu mepet ke atas */
         }
 
         .container {
             background-color: #fff;
-            padding: 1.5em; /* Mengurangi padding */
+            padding: 1.5em;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
@@ -40,7 +40,6 @@
             text-align: center;
             color: #2c3e50;
             margin-bottom: 0;
-            white-space: nowrap;
         }
 
         h2 {
@@ -135,7 +134,7 @@
         }
 
         .footer {
-            margin-top: auto; /* Mendorong footer ke bawah */
+            margin-top: 0; /* Hapus margin atas pada footer */
             text-align: center;
             font-size: 12px;
             color: #555;
