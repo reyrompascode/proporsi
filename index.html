@@ -1,276 +1,545 @@
 <!DOCTYPE html>
+
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perhitungan Proporsi Jumlah KK</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            /* Properti di bawah ini dihapus agar tidak berada di tengah */
-            /* display: flex; */
-            /* flex-direction: column; */
-            /* justify-content: center; */
-            /* align-items: center; */
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 2em;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
-            display: flex; /* Mengubah container menjadi flexbox */
-            flex-direction: column; /* Mengatur tata letak ke bawah */
-            min-height: 600px; /* Minimal tinggi agar ada ruang untuk footer di bawah */
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 1.5em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .main-content {
-            flex-grow: 1; /* Konten utama akan mengambil semua ruang yang tersedia */
-        }
-        .form-group {
-            margin-bottom: 1.5em;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5em;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 0.8em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .button-group {
-            display: flex;
-            gap: 10px;
-            justify-content: space-between;
-        }
-        button {
-            flex: 1;
-            padding: 0.8em;
-            font-size: 1em;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        .primary-btn {
-            background-color: #3498db;
-            color: #fff;
-        }
-        .primary-btn:hover {
-            background-color: #2980b9;
-        }
-        .danger-btn {
-            background-color: #e74c3c;
-            color: #fff;
-        }
-        .danger-btn:hover {
-            background-color: #c0392b;
-        }
-        #entry-btn {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-        .result {
-            margin-top: 1.5em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-        th {
-            background-color: #ecf0f1;
-        }
-        .total {
-            font-weight: bold;
-            background-color: #dcdde1;
-        }
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #555;
-            padding: 10px 0;
-            border-top: 1px solid #ddd;
-            font-style: italic;
-            margin-top: auto; /* Mendorong footer ke bawah kontainer */
-        }
-    </style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perhitungan Proporsi Jumlah KK</title>
+
+    <style>
+
+        body {
+
+            font-family: sans-serif;
+
+            background-color: #f4f4f9;
+
+            color: #333;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            margin: 0;
+
+            padding: 20px;
+
+        }
+
+        .container {
+
+            background-color: #fff;
+
+            padding: 2em;
+
+            border-radius: 8px;
+
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            width: 90%;
+
+            max-width: 500px;
+
+            margin-bottom: 20px;
+
+        }
+
+        h1 {
+
+            text-align: center;
+
+            color: #2c3e50;
+
+            margin-bottom: 0;
+
+        }
+
+        h2 {
+
+            text-align: center;
+
+            color: #555;
+
+            margin-top: 5px;
+
+            font-style: italic;
+
+            font-weight: normal;
+
+        }
+
+        .form-group {
+
+            margin-bottom: 1.5em;
+
+        }
+
+        label {
+
+            display: block;
+
+            margin-bottom: 0.5em;
+
+            font-weight: bold;
+
+        }
+
+        input[type="text"] {
+
+            width: 100%;
+
+            padding: 0.8em;
+
+            border: 1px solid #ccc;
+
+            border-radius: 4px;
+
+            box-sizing: border-box;
+
+        }
+
+        .button-group {
+
+            display: flex;
+
+            gap: 10px;
+
+            justify-content: space-between;
+
+        }
+
+        button {
+
+            flex: 1;
+
+            padding: 0.8em;
+
+            font-size: 1em;
+
+            cursor: pointer;
+
+            border: none;
+
+            border-radius: 4px;
+
+            transition: background-color 0.3s;
+
+        }
+
+        .primary-btn {
+
+            background-color: #3498db;
+
+            color: #fff;
+
+        }
+
+        .primary-btn:hover {
+
+            background-color: #2980b9;
+
+        }
+
+        .danger-btn {
+
+            background-color: #e74c3c;
+
+            color: #fff;
+
+        }
+
+        .danger-btn:hover {
+
+            background-color: #c0392b;
+
+        }
+
+        #entry-btn {
+
+            width: 100%;
+
+            margin-bottom: 15px;
+
+        }
+
+        .result {
+
+            margin-top: 1.5em;
+
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 10px;
+
+            border: 1px solid #ccc;
+
+        }
+
+        th, td {
+
+            padding: 10px;
+
+            text-align: center;
+
+            border: 1px solid #ccc;
+
+        }
+
+        th {
+
+            background-color: #ecf0f1;
+
+        }
+
+        .total {
+
+            font-weight: bold;
+
+            background-color: #dcdde1;
+
+        }
+
+        .footer {
+
+            margin-top: auto;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #555;
+
+            padding: 10px 0;
+
+            border-top: 1px solid #ddd;
+
+            font-style: italic;
+
+        }
+
+    </style>
+
 </head>
+
 <body>
-    <div class="container">
-        <h1>Perhitungan Proporsi Jumlah KK</h1>
 
-        <div class="main-content">
-            <div class="form-group">
-                <label for="segmen">Banyak Segmen:</label>
-                <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
-            </div>
+    <div class="container">
 
-            <div class="form-group">
-                <label for="totalVar2">Jumlah KK:</label>
-                <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
-            </div>
+        <h1>Perhitungan Proporsi Jumlah KK</h1>
 
-            <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
+        <h2>Pemutakhiran Wilkerstat SE2026</h2>
 
-            <form id="formSegmen"></form>
 
-            <div class="button-group">
-                <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
-                <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
-            </div>
 
-            <div class="result" id="hasil"></div>
-        </div>
+        <div class="form-group">
 
-        <div class="footer">
-            BPS Kota Jakarta Barat Jaya Jaya Jaya
-        </div>
-    </div>
+            <label for="segmen">Banyak Segmen:</label>
 
-    <script>
-        function formatRupiah(input) {
-            let number_string = input.value.replace(/\./g, '').toString();
-            let split = number_string.split(',');
-            let sisa = split[0].length % 3;
-            let rupiah = split[0].substr(0, sisa);
-            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
 
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
+        </div>
 
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            input.value = rupiah;
-        }
 
-        function buatInput() {
-            const jumlahRaw = document.getElementById('segmen').value;
-            const jumlah = parseInt(jumlahRaw.replace(/\./g, ''));
-            const form = document.getElementById('formSegmen');
-            form.innerHTML = "";
 
-            if (isNaN(jumlah) || jumlah <= 0) {
-                form.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Mohon masukkan jumlah segmen yang valid.</p>";
-                return;
-            }
+        <div class="form-group">
 
-            for (let i = 1; i <= jumlah; i++) {
-                form.innerHTML += `
-                    <div class="form-group">
-                        <label for="var1_${i}">BTT Segmen ${i}:</label>
-                        <input type="text" id="var1_${i}" onkeyup="formatRupiah(this)" min="0" required>
-                    </div>
-                `;
-            }
-        }
+            <label for="totalVar2">Jumlah KK:</label>
 
-        function hitung() {
-            const jumlahSegmenRaw = document.getElementById('segmen').value;
-            const jumlah = parseInt(jumlahSegmenRaw.replace(/\./g, ''));
-            
-            const totalVar2Raw = document.getElementById('totalVar2').value;
-            const totalVar2 = parseInt(totalVar2Raw.replace(/\./g, ''));
-            
-            const hasilElement = document.getElementById('hasil');
+            <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
 
-            if (isNaN(jumlah) || isNaN(totalVar2) || jumlah <= 0 || totalVar2 <= 0) {
-                hasilElement.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Mohon lengkapi semua input yang diperlukan.</p>";
-                return;
-            }
+        </div>
 
-            let values = [];
-            let totalVar1 = 0;
 
-            for (let i = 1; i <= jumlah; i++) {
-                const inputElement = document.getElementById(`var1_${i}`);
-                let v = parseInt(inputElement.value.replace(/\./g, '')) || 0;
-                values.push(v);
-                totalVar1 += v;
-            }
 
-            if (totalVar1 === 0) {
-                hasilElement.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Total BTT tidak boleh nol.</p>";
-                return;
-            }
+        <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
 
-            let hasilHTML = `
-                <table>
-                    <tr>
-                        <th>Segmen ke-</th>
-                        <th>BTT</th>
-                        <th>Jumlah KK</th>
-                    </tr>
-            `;
 
-            let totalV2 = 0;
-            let sisa = totalVar2;
-            
-            for (let i = 0; i < jumlah; i++) {
-                let v2 = Math.round((values[i] / totalVar1) * totalVar2);
-                
-                if (i === jumlah - 1) {
-                    v2 = sisa;
-                } else {
-                    sisa -= v2;
-                }
-                
-                totalV2 += v2;
-                hasilHTML += `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${formatAngka(values[i])}</td>
-                        <td>${formatAngka(v2)}</td>
-                    </tr>
-                `;
-            }
 
-            hasilHTML += `
-                <tr class="total">
-                    <td>Total</td>
-                    <td>${formatAngka(totalVar1)}</td>
-                    <td>${formatAngka(totalV2)}</td>
-                </tr>
-                </table>
-            `;
+        <form id="formSegmen"></form>
 
-            hasilElement.innerHTML = hasilHTML;
-        }
 
-        function resetForm() {
-            document.getElementById('segmen').value = "";
-            document.getElementById('totalVar2').value = "";
-            document.getElementById('formSegmen').innerHTML = "";
-            document.getElementById('hasil').innerHTML = "";
-        }
-        
-        function formatAngka(angka) {
-            return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
-    </script>
+
+        <div class="button-group">
+
+            <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
+
+            <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
+
+        </div>
+
+
+
+        <div class="result" id="hasil"></div>
+
+    </div>
+
+
+
+    <div class="footer">
+
+        BPS Kota Jakarta Barat Jaya Jaya Jaya
+
+    </div>
+
+
+
+    <script>
+
+        function formatRupiah(input) {
+
+            let number_string = input.value.replace(/\./g, '').toString();
+
+            let split = number_string.split(',');
+
+            let sisa = split[0].length % 3;
+
+            let rupiah = split[0].substr(0, sisa);
+
+            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+
+
+            if (ribuan) {
+
+                separator = sisa ? '.' : '';
+
+                rupiah += separator + ribuan.join('.');
+
+            }
+
+
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+
+            input.value = rupiah;
+
+        }
+
+
+
+        function buatInput() {
+
+            const jumlahRaw = document.getElementById('segmen').value;
+
+            const jumlah = parseInt(jumlahRaw.replace(/\./g, ''));
+
+            const form = document.getElementById('formSegmen');
+
+            form.innerHTML = "";
+
+
+
+            if (isNaN(jumlah) || jumlah <= 0) {
+
+                form.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Mohon masukkan jumlah segmen yang valid.</p>";
+
+                return;
+
+            }
+
+
+
+            for (let i = 1; i <= jumlah; i++) {
+
+                form.innerHTML += `
+
+                    <div class="form-group">
+
+                        <label for="var1_${i}">BTT Segmen ${i}:</label>
+
+                        <input type="text" id="var1_${i}" onkeyup="formatRupiah(this)" min="0" required>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        function hitung() {
+
+            const jumlahSegmenRaw = document.getElementById('segmen').value;
+
+            const jumlah = parseInt(jumlahSegmenRaw.replace(/\./g, ''));
+
+            
+
+            const totalVar2Raw = document.getElementById('totalVar2').value;
+
+            const totalVar2 = parseInt(totalVar2Raw.replace(/\./g, ''));
+
+            
+
+            const hasilElement = document.getElementById('hasil');
+
+
+
+            if (isNaN(jumlah) || isNaN(totalVar2) || jumlah <= 0 || totalVar2 <= 0) {
+
+                hasilElement.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Mohon lengkapi semua input yang diperlukan.</p>";
+
+                return;
+
+            }
+
+
+
+            let values = [];
+
+            let totalVar1 = 0;
+
+
+
+            for (let i = 1; i <= jumlah; i++) {
+
+                const inputElement = document.getElementById(`var1_${i}`);
+
+                let v = parseInt(inputElement.value.replace(/\./g, '')) || 0;
+
+                values.push(v);
+
+                totalVar1 += v;
+
+            }
+
+
+
+            if (totalVar1 === 0) {
+
+                hasilElement.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Total BTT tidak boleh nol.</p>";
+
+                return;
+
+            }
+
+
+
+            let hasilHTML = `
+
+                <table>
+
+                    <tr>
+
+                        <th>Segmen ke-</th>
+
+                        <th>BTT</th>
+
+                        <th>Jumlah KK</th>
+
+                    </tr>
+
+            `;
+
+
+
+            let totalV2 = 0;
+
+            let sisa = totalVar2;
+
+            
+
+            for (let i = 0; i < jumlah; i++) {
+
+                let v2 = Math.round((values[i] / totalVar1) * totalVar2);
+
+                
+
+                if (i === jumlah - 1) {
+
+                    v2 = sisa;
+
+                } else {
+
+                    sisa -= v2;
+
+                }
+
+                
+
+                totalV2 += v2;
+
+                hasilHTML += `
+
+                    <tr>
+
+                        <td>${i + 1}</td>
+
+                        <td>${formatAngka(values[i])}</td>
+
+                        <td>${formatAngka(v2)}</td>
+
+                    </tr>
+
+                `;
+
+            }
+
+
+
+            hasilHTML += `
+
+                <tr class="total">
+
+                    <td>Total</td>
+
+                    <td>${formatAngka(totalVar1)}</td>
+
+                    <td>${formatAngka(totalV2)}</td>
+
+                </tr>
+
+                </table>
+
+            `;
+
+
+
+            hasilElement.innerHTML = hasilHTML;
+
+        }
+
+
+
+        function resetForm() {
+
+            document.getElementById('segmen').value = "";
+
+            document.getElementById('totalVar2').value = "";
+
+            document.getElementById('formSegmen').innerHTML = "";
+
+            document.getElementById('hasil').innerHTML = "";
+
+        }
+
+        
+
+        function formatAngka(angka) {
+
+            return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        }
+
+    </script>
+
 </body>
+
 </html>
