@@ -29,12 +29,12 @@
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 0; /* Menghilangkan margin bawah default h1 */
+            margin-bottom: 0;
         }
         h2 {
             text-align: center;
             color: #555;
-            margin-top: 5px; /* Memberi sedikit jarak dari h1 */
+            margin-top: 5px;
             font-style: italic;
             font-weight: normal;
         }
@@ -46,7 +46,7 @@
             margin-bottom: 0.5em;
             font-weight: bold;
         }
-        input[type="number"] {
+        input[type="text"] {
             width: 100%;
             padding: 0.8em;
             border: 1px solid #ccc;
@@ -83,7 +83,7 @@
         }
         #entry-btn {
             width: 100%;
-            margin-bottom: 15px; /* Jarak antara tombol Entry dan tombol di bawahnya */
+            margin-bottom: 15px;
         }
         .result {
             margin-top: 1.5em;
@@ -124,12 +124,12 @@
 
         <div class="form-group">
             <label for="segmen">Banyak Segmen:</label>
-            <input type="number" id="segmen" min="1">
+            <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
         </div>
 
         <div class="form-group">
             <label for="totalVar2">Jumlah KK:</label>
-            <input type="number" id="totalVar2" min="1">
+            <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
         </div>
 
         <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
@@ -149,8 +149,25 @@
     </div>
 
     <script>
+        function formatRupiah(input) {
+            let number_string = input.value.replace(/\./g, '').toString();
+            let split = number_string.split(',');
+            let sisa = split[0].length % 3;
+            let rupiah = split[0].substr(0, sisa);
+            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            input.value = rupiah;
+        }
+
         function buatInput() {
-            const jumlah = parseInt(document.getElementById('segmen').value);
+            const jumlahRaw = document.getElementById('segmen').value;
+            const jumlah = parseInt(jumlahRaw.replace(/\./g, ''));
             const form = document.getElementById('formSegmen');
             form.innerHTML = "";
 
@@ -163,15 +180,19 @@
                 form.innerHTML += `
                     <div class="form-group">
                         <label for="var1_${i}">BTT Segmen ${i}:</label>
-                        <input type="number" id="var1_${i}" min="0" required>
+                        <input type="text" id="var1_${i}" onkeyup="formatRupiah(this)" min="0" required>
                     </div>
                 `;
             }
         }
 
         function hitung() {
-            const jumlah = parseInt(document.getElementById('segmen').value);
-            const totalVar2 = parseInt(document.getElementById('totalVar2').value);
+            const jumlahSegmenRaw = document.getElementById('segmen').value;
+            const jumlah = parseInt(jumlahSegmenRaw.replace(/\./g, ''));
+            
+            const totalVar2Raw = document.getElementById('totalVar2').value;
+            const totalVar2 = parseInt(totalVar2Raw.replace(/\./g, ''));
+            
             const hasilElement = document.getElementById('hasil');
 
             if (isNaN(jumlah) || isNaN(totalVar2) || jumlah <= 0 || totalVar2 <= 0) {
@@ -184,7 +205,7 @@
 
             for (let i = 1; i <= jumlah; i++) {
                 const inputElement = document.getElementById(`var1_${i}`);
-                let v = parseInt(inputElement.value) || 0;
+                let v = parseInt(inputElement.value.replace(/\./g, '')) || 0;
                 values.push(v);
                 totalVar1 += v;
             }
@@ -219,8 +240,8 @@
                 hasilHTML += `
                     <tr>
                         <td>${i + 1}</td>
-                        <td>${values[i]}</td>
-                        <td>${v2}</td>
+                        <td>${formatAngka(values[i])}</td>
+                        <td>${formatAngka(v2)}</td>
                     </tr>
                 `;
             }
@@ -228,8 +249,8 @@
             hasilHTML += `
                 <tr class="total">
                     <td>Total</td>
-                    <td>${totalVar1}</td>
-                    <td>${totalV2}</td>
+                    <td>${formatAngka(totalVar1)}</td>
+                    <td>${formatAngka(totalV2)}</td>
                 </tr>
                 </table>
             `;
@@ -242,6 +263,10 @@
             document.getElementById('totalVar2').value = "";
             document.getElementById('formSegmen').innerHTML = "";
             document.getElementById('hasil').innerHTML = "";
+        }
+        
+        function formatAngka(angka) {
+            return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     </script>
 </body>
