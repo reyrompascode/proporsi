@@ -29,13 +29,14 @@
         h1 {
             text-align: center;
             color: #2c3e50;
+            margin-bottom: 0; /* Menghilangkan margin bawah default h1 */
         }
         h2 {
             text-align: center;
             color: #555;
-            margin-top: -1em; /* Mengatur jarak agar lebih dekat dengan h1 */
+            margin-top: 5px; /* Memberi sedikit jarak dari h1 */
             font-style: italic;
-            font-weight: normal; /* Membuat font tidak tebal */
+            font-weight: normal;
         }
         .form-group {
             margin-bottom: 1.5em;
@@ -80,6 +81,10 @@
         .danger-btn:hover {
             background-color: #c0392b;
         }
+        #entry-btn {
+            width: 100%;
+            margin-bottom: 15px; /* Jarak antara tombol Entry dan tombol di bawahnya */
+        }
         .result {
             margin-top: 1.5em;
         }
@@ -87,7 +92,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
-            border: 1px solid #ccc; /* Tambahan border pada tabel */
+            border: 1px solid #ccc;
         }
         th, td {
             padding: 10px;
@@ -127,9 +132,7 @@
             <input type="number" id="totalVar2" min="1">
         </div>
 
-        <div class="button-group">
-            <button class="primary-btn" onclick="buatInput()">Entry BTT per segmen</button>
-        </div>
+        <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
 
         <form id="formSegmen"></form>
 
@@ -206,7 +209,6 @@
             for (let i = 0; i < jumlah; i++) {
                 let v2 = Math.round((values[i] / totalVar1) * totalVar2);
                 
-                // Distribusi sisa pembulatan
                 if (i === jumlah - 1) {
                     v2 = sisa;
                 } else {
@@ -216,31 +218,4 @@
                 totalV2 += v2;
                 hasilHTML += `
                     <tr>
-                        <td>${i + 1}</td>
-                        <td>${values[i]}</td>
-                        <td>${v2}</td>
-                    </tr>
-                `;
-            }
-
-            hasilHTML += `
-                <tr class="total">
-                    <td>Total</td>
-                    <td>${totalVar1}</td>
-                    <td>${totalV2}</td>
-                </tr>
-                </table>
-            `;
-
-            hasilElement.innerHTML = hasilHTML;
-        }
-
-        function resetForm() {
-            document.getElementById('segmen').value = "";
-            document.getElementById('totalVar2').value = "";
-            document.getElementById('formSegmen').innerHTML = "";
-            document.getElementById('hasil').innerHTML = "";
-        }
-    </script>
-</body>
-</html>
+                        <td>
