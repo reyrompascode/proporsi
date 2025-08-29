@@ -9,7 +9,8 @@
             font-family: sans-serif;
             background-color: #f4f4f9;
             color: #333;
-            margin: 0;
+            margin: 0; /* Pastikan tidak ada margin default pada body */
+            overflow-y: auto; /* Mengizinkan scroll jika konten melebihi tinggi layar */
         }
 
         .main-wrapper {
@@ -23,12 +24,12 @@
             justify-content: center;
             align-items: center;
             flex-grow: 1; /* Konten akan mengisi ruang kosong */
-            padding: 20px;
+            /* padding: 20px; Menghapus padding ini */
         }
 
         .container {
             background-color: #fff;
-            padding: 2em;
+            padding: 1.5em; /* Mengurangi padding */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
