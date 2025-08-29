@@ -9,14 +9,23 @@
             font-family: sans-serif;
             background-color: #f4f4f9;
             color: #333;
+            margin: 0;
+        }
+
+        .main-wrapper {
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
+            flex-grow: 1; /* Konten akan mengisi ruang kosong */
             padding: 20px;
         }
+
         .container {
             background-color: #fff;
             padding: 2em;
@@ -24,13 +33,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 500px;
-            margin-bottom: 20px;
         }
+        
         h1 {
             text-align: center;
             color: #2c3e50;
             margin-bottom: 0;
+            white-space: nowrap;
         }
+
         h2 {
             text-align: center;
             color: #555;
@@ -38,14 +49,17 @@
             font-style: italic;
             font-weight: normal;
         }
+
         .form-group {
             margin-bottom: 1.5em;
         }
+
         label {
             display: block;
             margin-bottom: 0.5em;
             font-weight: bold;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 0.8em;
@@ -53,11 +67,13 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         .button-group {
             display: flex;
             gap: 10px;
             justify-content: space-between;
         }
+
         button {
             flex: 1;
             padding: 0.8em;
@@ -67,47 +83,58 @@
             border-radius: 4px;
             transition: background-color 0.3s;
         }
+
         .primary-btn {
             background-color: #3498db;
             color: #fff;
         }
+
         .primary-btn:hover {
             background-color: #2980b9;
         }
+
         .danger-btn {
             background-color: #e74c3c;
             color: #fff;
         }
+
         .danger-btn:hover {
             background-color: #c0392b;
         }
+
         #entry-btn {
             width: 100%;
             margin-bottom: 15px;
         }
+
         .result {
             margin-top: 1.5em;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
             border: 1px solid #ccc;
         }
+
         th, td {
             padding: 10px;
             text-align: center;
             border: 1px solid #ccc;
         }
+
         th {
             background-color: #ecf0f1;
         }
+
         .total {
             font-weight: bold;
             background-color: #dcdde1;
         }
+
         .footer {
-            margin-top: auto;
+            margin-top: auto; /* Mendorong footer ke bawah */
             text-align: center;
             font-size: 12px;
             color: #555;
@@ -118,36 +145,40 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Perhitungan Proporsi Jumlah KK</h1>
-        <h2>Pemutakhiran Wilkerstat SE2026</h2>
-
-        <div class="form-group">
-            <label for="segmen">Banyak Segmen:</label>
-            <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
+    <div class="main-wrapper">
+        <div class="content-container">
+            <div class="container">
+                <h1>Perhitungan Proporsi Jumlah KK</h1>
+                <h2>Pemutakhiran Wilkerstat SE2026</h2>
+        
+                <div class="form-group">
+                    <label for="segmen">Banyak Segmen:</label>
+                    <input type="text" id="segmen" onkeyup="formatRupiah(this)" min="1">
+                </div>
+        
+                <div class="form-group">
+                    <label for="totalVar2">Jumlah KK:</label>
+                    <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
+                </div>
+        
+                <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
+        
+                <form id="formSegmen"></form>
+        
+                <div class="button-group">
+                    <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
+                    <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
+                </div>
+        
+                <div class="result" id="hasil"></div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="totalVar2">Jumlah KK:</label>
-            <input type="text" id="totalVar2" onkeyup="formatRupiah(this)" min="1">
+        <div class="footer">
+            BPS Kota Jakarta Barat Jaya Jaya Jaya
         </div>
-
-        <button class="primary-btn" id="entry-btn" onclick="buatInput()">Entry BTT per segmen</button>
-
-        <form id="formSegmen"></form>
-
-        <div class="button-group">
-            <button class="primary-btn" onclick="hitung()">Hitung Jumlah KK</button>
-            <button class="danger-btn" onclick="resetForm()">Mulai Baru</button>
-        </div>
-
-        <div class="result" id="hasil"></div>
     </div>
-
-    <div class="footer">
-        BPS Kota Jakarta Barat Jaya Jaya Jaya
-    </div>
-
+    
     <script>
         // Fungsi untuk memformat input menjadi format Rupiah (dengan pemisah titik)
         function formatRupiah(input) {
